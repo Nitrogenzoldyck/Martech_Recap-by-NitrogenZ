@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martech Expo 2026 · Recap by NitrogenZ.</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#080808;--s1:#111;--s2:#181818;--s3:#1f1f1f;
+  --pk:#f72585;--pk2:#ff5ca8;--pk3:rgba(247,37,133,.12);
+  --wh:#fff;--wh2:#f0f0f0;--wh3:rgba(255,255,255,.08);--wh4:rgba(255,255,255,.04);
+  --bd:rgba(255,255,255,.08);--bd2:rgba(247,37,133,.2);
+  --muted:#555;--muted2:#999;
+  --font:'IBM Plex Sans Thai','IBM Plex Sans',sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--wh2);font-family:var(--font);overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;
+  background-image:
+    repeating-linear-gradient(135deg,transparent,transparent 60px,rgba(247,37,133,.022) 60px,rgba(247,37,133,.022) 61px),
+    repeating-linear-gradient(45deg,transparent,transparent 80px,rgba(255,255,255,.012) 80px,rgba(255,255,255,.012) 81px);
+  pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 60% 40% at 5% 0%,rgba(247,37,133,.07) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 50% at 95% 100%,rgba(247,37,133,.05) 0%,transparent 55%);
+  pointer-events:none;z-index:0;}
+
+/* ══ LOGIN ══ */
+#login-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;align-items:center;justify-content:center;}
+#login-screen::before{content:'';position:absolute;inset:0;
+  background-image:repeating-linear-gradient(135deg,transparent,transparent 60px,rgba(247,37,133,.03) 60px,rgba(247,37,133,.03) 61px);}
+.login-box{position:relative;z-index:1;width:100%;max-width:360px;padding:0 24px;animation:fadeDown .8s ease both;}
+.login-logo{text-align:center;margin-bottom:36px;}
+.login-logo .eyebrow{font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:3px;text-transform:uppercase;display:flex;align-items:center;justify-content:center;gap:6px;}
+.login-logo .eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--pk);animation:pulse 2s infinite;}
+.login-logo h2{font-size:28px;font-weight:700;margin-top:12px;background:linear-gradient(135deg,#fff 40%,var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;}
+.login-logo p{font-size:12px;color:var(--muted2);margin-top:6px;}
+.lf{margin-bottom:14px;}
+.lf label{display:block;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:7px;}
+.lf input{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:12px 15px;font-family:var(--font);font-size:14px;color:var(--wh);outline:none;transition:border .2s,box-shadow .2s;}
+.lf input:focus{border-color:var(--pk);box-shadow:0 0 0 3px rgba(247,37,133,.12);}
+.login-btn{width:100%;margin-top:6px;background:var(--pk);border:none;border-radius:10px;padding:13px;font-family:var(--font);font-size:14px;font-weight:700;color:#fff;cursor:pointer;transition:background .2s,box-shadow .2s;}
+.login-btn:hover{background:#e01f74;box-shadow:0 6px 24px rgba(247,37,133,.4);}
+.login-err{margin-top:11px;padding:9px 13px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);border-radius:8px;font-size:12px;color:#f87171;text-align:center;display:none;}
+.login-foot{text-align:center;margin-top:28px;font-size:11px;color:var(--muted2);}
+.login-foot strong{color:var(--pk);font-family:var(--mono);}
+
+/* ══ APP ══ */
+#app{display:none;position:relative;z-index:1;}
+
+/* ══ TOPNAV ══ */
+.topnav{position:sticky;top:0;z-index:100;background:rgba(8,8,8,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);height:52px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;}
+.nav-brand{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--pk);animation:pulse 2s infinite;}
+.nav-r{display:flex;align-items:center;gap:14px;}
+.nav-date{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.nav-user{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--pk2);}
+.nav-avatar{width:26px;height:26px;border-radius:50%;background:var(--pk3);border:1px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--pk);}
+
+/* ══ TAB BAR ══ */
+.tabbar{position:sticky;top:52px;z-index:99;background:rgba(8,8,8,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding:0 20px;display:flex;gap:0;overflow-x:auto;}
+.tabbar::-webkit-scrollbar{display:none;}
+.tab-btn{flex-shrink:0;padding:14px 20px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--muted2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:color .2s,border .2s;white-space:nowrap;display:flex;align-items:center;gap:7px;}
+.tab-btn:hover{color:var(--wh2);}
+.tab-btn.active{color:var(--pk);border-bottom-color:var(--pk);}
+.tab-dot{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.6;}
+.tab-count{font-family:var(--mono);font-size:9px;background:rgba(247,37,133,.15);color:var(--pk);border-radius:10px;padding:2px 6px;}
+
+/* ══ PAGE ══ */
+.set-page{display:none;}
+.set-page.active{display:block;}
+.page{max-width:1040px;margin:0 auto;padding:48px 20px 90px;}
+
+/* ══ HERO ══ */
+.hero{text-align:center;margin-bottom:60px;animation:fadeDown .9s ease both;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:rgba(247,37,133,.1);border:1px solid rgba(247,37,133,.25);color:var(--pk);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;padding:5px 15px;border-radius:30px;margin-bottom:18px;}
+.pd{width:6px;height:6px;border-radius:50%;background:var(--pk);animation:pulse 2s infinite;}
+.hero h1{font-size:clamp(24px,5vw,52px);font-weight:700;line-height:1.05;letter-spacing:-1px;background:linear-gradient(135deg,#fff 30%,var(--pk) 65%,#ff8cc8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.hero-sub{font-size:14px;color:var(--muted2);margin-bottom:22px;font-weight:300;}
+.hero-meta{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted2);margin-bottom:20px;}
+.hero-sep{color:rgba(255,255,255,.15);}
+.speakers{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;}
+.sc{display:flex;align-items:center;gap:7px;background:var(--s1);border:1px solid var(--bd);border-radius:30px;padding:5px 13px 5px 5px;font-size:11px;transition:border .2s;}
+.sc:hover{border-color:var(--bd2);}
+.sa{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;}
+.sr{font-size:10px;color:var(--muted2);}
+
+/* ══ SECTION HEADER ══ */
+.sh{display:flex;align-items:center;gap:11px;margin-bottom:22px;}
+.sh-n{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:2px;padding:4px 10px;border-radius:6px;border:1px solid;flex-shrink:0;}
+.sh h2{font-size:17px;font-weight:700;letter-spacing:-.3px;}
+.sh hr{flex:1;border:none;border-top:1px solid var(--bd);}
+
+/* ══ SECTION WRAPPERS ══ */
+.sec{margin-bottom:60px;animation:fadeUp .7s ease both;}
+
+/* ══ CARDS ══ */
+.card{background:var(--s1);border-radius:14px;border:1px solid var(--bd);padding:20px;transition:transform .2s,border .2s,box-shadow .2s;}
+.card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.12);box-shadow:0 10px 36px rgba(0,0,0,.5);}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;}
+@media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+
+/* ══ BANNER HIGHLIGHT ══ */
+.banner{background:rgba(247,37,133,.06);border:1px solid rgba(247,37,133,.15);border-radius:14px;padding:22px 24px;margin-bottom:18px;}
+.banner h3{font-size:clamp(15px,2.5vw,22px);font-weight:700;line-height:1.3;margin-bottom:7px;}
+.banner h3 em{color:var(--pk);font-style:normal;}
+.banner p{font-size:13px;color:var(--muted2);line-height:1.7;}
+.banner-white{background:rgba(255,255,255,.04);border:1px solid var(--bd);}
+
+/* ══ QUOTE BLOCK ══ */
+.qblock{padding:14px 18px;background:rgba(247,37,133,.06);border-left:3px solid var(--pk);border-radius:0 10px 10px 0;font-size:14px;font-weight:600;line-height:1.6;margin-bottom:14px;}
+.qblock em{color:var(--pk);font-style:normal;}
+
+/* ══ FLOW / PILLS ══ */
+.flow-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:11.5px;margin-bottom:7px;}
+.fbubble{background:rgba(247,37,133,.1);border:1px solid rgba(247,37,133,.2);border-radius:20px;padding:5px 11px;font-weight:600;font-size:11px;color:var(--pk2);white-space:nowrap;}
+.farrow{color:var(--muted);font-size:12px;}
+.fresult{background:rgba(255,255,255,.07);border:1px solid var(--bd);border-radius:20px;padding:5px 11px;font-weight:700;font-size:11px;color:var(--wh);}
+
+/* ══ TABLE ══ */
+.tbl{width:100%;border-collapse:separate;border-spacing:0 4px;}
+.tbl thead th{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:9px 13px;color:var(--muted2);text-align:left;}
+.tbl tbody td{padding:9px 13px;background:var(--s1);border-top:1px solid rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.03);font-size:12px;vertical-align:middle;}
+.tbl tbody td:first-child{border-radius:10px 0 0 10px;border-left:1px solid rgba(255,255,255,.03);font-family:var(--mono);font-weight:600;font-size:10.5px;color:var(--muted2);}
+.tbl tbody td:last-child{border-radius:0 10px 10px 0;border-right:1px solid rgba(255,255,255,.03);}
+.tbl tbody tr:hover td{background:rgba(255,255,255,.03);}
+
+/* ══ BAR CHART ══ */
+.bar-wrap{display:flex;flex-direction:column;gap:7px;}
+.bar-item{display:flex;align-items:center;gap:10px;font-size:12px;}
+.bar-label{min-width:180px;text-align:right;color:var(--muted2);font-size:11px;flex-shrink:0;}
+.bar-track{flex:1;height:20px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden;position:relative;}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px;font-size:10px;font-weight:700;color:#fff;font-family:var(--mono);transition:width .8s ease;}
+.bar-val{font-family:var(--mono);font-size:11px;color:var(--pk2);min-width:38px;}
+.bar-top3{border-left:2px solid var(--pk);}
+@media(max-width:600px){.bar-label{min-width:120px;font-size:10px;}}
+
+/* ══ DATA TABLE ══ */
+.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:11px;margin-bottom:16px;}
+.data-card{background:var(--s2);border-radius:12px;padding:14px;border:1px solid var(--bd);text-align:center;}
+.data-card .dc-num{font-family:var(--mono);font-size:22px;font-weight:700;margin-bottom:4px;}
+.data-card .dc-label{font-size:11px;color:var(--muted2);line-height:1.4;}
+
+/* ══ AI vs HUMAN ══ */
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+@media(max-width:500px){.vs-grid{grid-template-columns:1fr;}}
+.vs-card{border-radius:14px;padding:20px;}
+.vs-card h4{font-size:15px;font-weight:700;margin-bottom:12px;}
+.vs-item{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;margin-bottom:7px;line-height:1.5;}
+.vs-item .vi{flex-shrink:0;margin-top:2px;}
+
+/* ══ DATA EVOLUTION ══ */
+.evo-wrap{display:flex;flex-direction:column;gap:6px;}
+.evo-row{display:grid;grid-template-columns:180px 1fr 1fr;gap:10px;align-items:stretch;}
+@media(max-width:600px){.evo-row{grid-template-columns:120px 1fr 1fr;}}
+.evo-label{display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-family:var(--mono);font-size:11px;font-weight:700;text-align:right;}
+.evo-data{border-radius:9px;padding:10px 13px;font-size:12px;font-weight:600;color:#fff;}
+.evo-mkt{background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:9px;padding:10px 13px;font-size:11.5px;color:var(--muted2);}
+
+/* ══ PRIORITY MATRIX ══ */
+.matrix-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--bd);border-radius:12px;overflow:hidden;margin-bottom:14px;}
+.matrix-cell{padding:22px 18px;}
+.matrix-cell .mc-title{font-size:16px;font-weight:700;margin-bottom:5px;}
+.matrix-cell .mc-desc{font-size:11.5px;color:var(--muted2);line-height:1.5;}
+.mc-divider-v{border-left:1px solid var(--bd);}
+.mc-divider-h{border-top:1px solid var(--bd);}
+
+/* ══ PLATFORM LIST ══ */
+.plat-list{display:flex;flex-direction:column;gap:8px;}
+.plat-row{display:grid;grid-template-columns:48px 1fr;align-items:center;gap:13px;background:var(--s1);border-radius:13px;padding:13px 17px;border:1px solid var(--bd);transition:border .2s,transform .2s;}
+.plat-row:hover{border-color:var(--bd2);transform:translateX(4px);}
+.plat-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;background:#111;}
+.p-role{font-size:16px;font-weight:700;}
+.p-desc{font-size:11.5px;color:var(--muted2);margin-top:2px;}
+
+/* ══ STEP CARDS ══ */
+.steps5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+@media(max-width:640px){.steps5{grid-template-columns:1fr;}}
+.step-card{background:var(--s1);border-radius:12px;padding:14px 11px;border:1px solid var(--bd);text-align:center;transition:border .2s,transform .2s;}
+.step-card:hover{border-color:var(--bd2);transform:translateY(-3px);}
+.step-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;font-weight:700;margin:0 auto 8px;}
+.step-title{font-size:12px;font-weight:700;line-height:1.3;margin-bottom:4px;}
+.step-sub{font-size:10.5px;color:var(--muted2);line-height:1.4;}
+
+/* ══ KEY CARDS (SUMMARY) ══ */
+.key-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:9px;}
+.key-card{background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:11px;padding:13px 14px;display:flex;gap:9px;}
+.kn{font-family:var(--mono);font-size:18px;font-weight:700;line-height:1;flex-shrink:0;min-width:20px;}
+.kt h5{font-size:12px;font-weight:700;margin-bottom:3px;}
+.kt p{font-size:11px;color:var(--muted2);line-height:1.5;}
+
+/* ══ INSIGHT CARD (expanded) ══ */
+.insight-block{background:var(--s2);border-radius:13px;padding:18px 20px;border:1px solid var(--bd);margin-bottom:12px;}
+.insight-block h4{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--pk2);}
+.insight-item{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;margin-bottom:8px;line-height:1.6;}
+.insight-item:last-child{margin-bottom:0;}
+.i-dot{width:6px;height:6px;border-radius:50%;background:var(--pk);flex-shrink:0;margin-top:6px;}
+
+/* ══ QUOTE SLIDES (Set 3) ══ */
+.quote-slides{display:flex;flex-direction:column;gap:10px;}
+.qs-item{background:var(--s1);border-radius:14px;padding:20px 22px;border:1px solid var(--bd);transition:border .2s;}
+.qs-item:hover{border-color:rgba(247,37,133,.2);}
+.qs-main{font-size:clamp(15px,2.5vw,20px);font-weight:700;line-height:1.4;margin-bottom:6px;}
+.qs-main em{color:var(--pk);font-style:normal;}
+.qs-main .contrast{color:var(--muted2);font-weight:400;}
+.qs-insight{font-size:12px;color:var(--muted2);line-height:1.6;padding-top:8px;border-top:1px solid var(--bd);}
+
+/* ══ AI vs BRAND BIG ══ */
+.ai-brand-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:18px;border:1px solid var(--bd);border-radius:14px;overflow:hidden;}
+.ab-cell{padding:22px;}
+.ab-cell h4{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--mono);margin-bottom:12px;}
+.ab-cell .ab-title{font-size:17px;font-weight:800;margin-bottom:4px;}
+.ab-cell .ab-sub{font-size:12px;color:var(--muted2);margin-bottom:14px;line-height:1.5;}
+.ab-cell .ab-items{display:flex;flex-direction:column;gap:6px;}
+.ab-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;}
+.ab-item .ai-mark{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;flex-shrink:0;margin-top:1px;}
+.ab-divider{border-left:1px solid var(--bd);}
+
+/* ══ FOOTER ══ */
+.footer{text-align:center;margin-top:52px;padding-top:20px;border-top:1px solid var(--bd);}
+.footer-brand{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--pk);margin-bottom:5px;}
+.footer-detail{font-size:11px;color:var(--muted);}
+
+/* ══ PROGRESS BAR ══ */
+.prog-bar{height:3px;background:rgba(247,37,133,.15);position:fixed;top:0;left:0;right:0;z-index:200;}
+.prog-fill{height:100%;background:var(--pk);width:0;transition:width .3s;}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+</style>
+</head>
+<body>
+
+<div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+
+<!-- ════════════════════ LOGIN ════════════════════ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="eyebrow"><span class="eyebrow-dot"></span>Martech Expo 2026 · All Sets</div>
+      <h2>Recap by<br>NitrogenZ.</h2>
+      <p>Enter password to access</p>
+    </div>
+    <div class="lf"><label>Password</label><input type="password" id="pw" placeholder="••••••••" autocomplete="off"></div>
+    <button class="login-btn" onclick="doLogin()">Enter →</button>
+    <div class="login-err" id="login-err">Incorrect password. Try again.</div>
+    <div class="login-foot"><strong>NitrogenZ.</strong> · 24 Mar 2026</div>
+  </div>
+</div>
+
+<!-- ════════════════════ APP ════════════════════ -->
+<div id="app">
+
+<nav class="topnav">
+  <div class="nav-brand"><div class="nav-dot"></div>Martech 2026</div>
+  <div class="nav-r">
+    <div class="nav-date">24 Mar 2026</div>
+    <div class="nav-user"><div class="nav-avatar">N</div>NitrogenZ.</div>
+  </div>
+</nav>
+
+<div class="tabbar">
+  <button class="tab-btn active" onclick="switchTab(0,this)">
+    <div class="tab-dot"></div>Set 1 — Social Media &amp; Influencer
+    <span class="tab-count">9</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab(1,this)">
+    <div class="tab-dot"></div>Set 2 — Digital Marketing &amp; Consumer
+    <span class="tab-count">8</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab(2,this)">
+    <div class="tab-dot"></div>Set 3 — Big Brands &amp; AI Era
+    <span class="tab-count">7</span>
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════
+  SET 1 — Social Media & Influencer Trends 2026
+══════════════════════════════════════════ -->
+<div class="set-page active" id="set0">
+<div class="page">
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="pd"></span>Set 1 · Martech Expo 2026</div>
+    <h1>Social Media &<br>Influencer Trends 2026</h1>
+    <p class="hero-sub">ทิศทางโซเชียลมีเดียและการตลาดอินฟลูเอนเซอร์ในปี 2026</p>
+    <div class="hero-meta"><span>📍 Martech Expo 2026</span><span class="hero-sep">·</span><span>🗓️ 24 Mar 2026</span><span class="hero-sep">·</span><span>✍️ Recap By NitrogenZ.</span></div>
+    <div class="speakers">
+      <div class="sc"><div class="sa" style="background:rgba(247,37,133,.12);color:var(--pk);">ภ</div><div><div style="font-size:12px;font-weight:600;">ภณ.โสภา พิมพ์สิริพานิชย์</div><div class="sr">MD, Digital Shortcut</div></div></div>
+      <div class="sc"><div class="sa" style="background:rgba(255,255,255,.07);color:#fff;">ส</div><div><div style="font-size:12px;font-weight:600;">สุวิตา อรัญวงศ์</div><div class="sr">CEO, Tellscore</div></div></div>
+      <div class="sc"><div class="sa" style="background:rgba(247,37,133,.08);color:var(--pk2);">พ</div><div><div style="font-size:12px;font-weight:600;">พรรษรณ ประไพพิพัฒน์</div><div class="sr">Moderator, Yell Bangkok</div></div></div>
+    </div>
+  </div>
+
+  <!-- S1: Trust Economy -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">01</div><h2>The Trust Economy</h2><hr></div>
+    <div class="banner"><h3>ท่ามกลาง <em>3 วิกฤต</em> ที่ทำลาย Trust</h3><p>1. AI-Generated Content ที่ระบาด · 2. Cybercrime · 3. Algorithm ที่ควบคุมชีวิตเรา → ทำให้ "ความเชื่อใจ" กลายเป็นทรัพย์สินมีค่าที่สุด</p></div>
+    <div class="grid2">
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:11px;color:var(--pk2);">🤖 Algorithm = Constant Environment</div>
+        <div class="flow-row"><div class="fbubble">Wake up</div><div class="farrow">→</div><div class="fbubble">Algorithm Decides</div><div class="farrow">→</div><div class="fresult">Our Mood</div></div>
+        <div class="flow-row"><div class="fbubble">We Shop</div><div class="farrow">→</div><div class="fbubble">Algorithm Decides</div><div class="farrow">→</div><div class="fresult">Our Desire</div></div>
+        <div style="margin-top:11px;padding:9px 12px;background:rgba(247,37,133,.06);border-radius:8px;font-size:11.5px;color:var(--pk2);">Algorithm ไม่ใช่แค่ Tool — มันคือสภาพแวดล้อมของชีวิต</div>
+      </div>
+      <div class="card" style="border-color:rgba(255,255,255,.1);">
+        <div style="font-size:13px;font-weight:700;margin-bottom:9px;color:var(--wh2);">⚠️ The Trust Paradox</div>
+        <div class="qblock">"We trust what we <em>do not</em> understand"</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <div style="display:flex;align-items:center;gap:9px;font-size:12px;"><div style="background:rgba(255,255,255,.06);border-radius:7px;padding:4px 10px;font-size:10.5px;min-width:140px;text-align:center;">Invisible → neutral</div><div style="color:var(--muted2);">มองไม่เห็น รู้สึกเป็นกลาง</div></div>
+          <div style="display:flex;align-items:center;gap:9px;font-size:12px;"><div style="background:rgba(255,255,255,.06);border-radius:7px;padding:4px 10px;font-size:10.5px;min-width:140px;text-align:center;">Personalized → intimate</div><div style="color:var(--muted2);">รู้สึกว่า "รู้จักเรา"</div></div>
+          <div style="display:flex;align-items:center;gap:9px;font-size:12px;"><div style="background:rgba(255,255,255,.06);border-radius:7px;padding:4px 10px;font-size:10.5px;min-width:140px;text-align:center;">Constant → reliable</div><div style="color:var(--muted2);">มีอยู่ตลอด รู้สึกน่าเชื่อ</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:13px;padding:13px 18px;border-radius:11px;background:rgba(247,37,133,.07);border:1px solid rgba(247,37,133,.18);font-size:13px;font-weight:600;color:var(--pk2);text-align:center;line-height:1.6;">🚨 <strong style="color:var(--pk);">This is NOT Trust. It is habit.</strong> — True Trust grows from <strong>Understanding</strong> ไม่ใช่ความเคยชิน</div>
+  </div>
+
+  <!-- S1: TRR -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">02</div><h2>Trust → Relationship → Revenue</h2><hr></div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:16px;">
+      <div style="background:var(--s2);border:1px solid rgba(247,37,133,.3);border-radius:13px;padding:13px 22px;text-align:center;flex:1;min-width:110px;max-width:180px;"><div style="font-size:13px;font-weight:700;color:var(--pk);">🤝 Trust</div><div style="font-size:10px;color:var(--muted2);margin-top:2px;">สร้างความเชื่อใจ</div></div>
+      <div style="font-size:20px;color:var(--pk);padding:0 6px;flex-shrink:0;">»»</div>
+      <div style="background:var(--s2);border:1px solid var(--bd);border-radius:13px;padding:13px 22px;text-align:center;flex:1;min-width:110px;max-width:180px;"><div style="font-size:13px;font-weight:700;">💞 Relationship</div><div style="font-size:10px;color:var(--muted2);margin-top:2px;">ความสัมพันธ์</div></div>
+      <div style="font-size:20px;color:var(--pk);padding:0 6px;flex-shrink:0;">»»</div>
+      <div style="background:var(--s2);border:1px solid rgba(247,37,133,.3);border-radius:13px;padding:13px 22px;text-align:center;flex:1;min-width:110px;max-width:180px;"><div style="font-size:13px;font-weight:700;color:var(--pk2);">💰 Revenue</div><div style="font-size:10px;color:var(--muted2);margin-top:2px;">เกิดรายได้</div></div>
+    </div>
+    <div style="text-align:center;padding:14px 18px;background:rgba(247,37,133,.06);border:1px solid rgba(247,37,133,.15);border-radius:12px;font-size:14px;font-weight:600;line-height:1.6;">Trust อย่างเดียว <span style="color:var(--pk);">ไม่ทำให้เกิดเงิน</span> — แต่ Trust ที่ถูก<span style="color:var(--pk);">ต่อยอดเป็นความสัมพันธ์</span> จะทำให้เกิดรายได้</div>
+  </div>
+
+  <!-- S1: 3 Shifts -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">03</div><h2>3 การเปลี่ยนแปลงที่ Creator ต้องรู้</h2><hr></div>
+    <div class="grid3" style="margin-bottom:14px;">
+      <div class="card"><div style="background:rgba(255,255,255,.05);border:1px solid var(--bd);color:var(--muted2);border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:600;display:inline-block;margin-bottom:8px;">Audience</div><div style="font-size:18px;color:var(--pk);margin:5px 0;">↓</div><div style="background:rgba(247,37,133,.1);border:1px solid rgba(247,37,133,.2);color:var(--pk2);border-radius:7px;padding:4px 11px;font-size:13px;font-weight:700;display:inline-block;margin-bottom:8px;">🏘️ Community</div><div style="font-size:11px;color:var(--muted2);line-height:1.5;">จากผู้ติดตาม → ชุมชนที่มีความรู้สึกร่วม</div></div>
+      <div class="card"><div style="background:rgba(255,255,255,.05);border:1px solid var(--bd);color:var(--muted2);border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:600;display:inline-block;margin-bottom:8px;">Content</div><div style="font-size:18px;color:var(--pk);margin:5px 0;">↓</div><div style="background:rgba(255,255,255,.07);border:1px solid var(--bd);color:#fff;border-radius:7px;padding:4px 11px;font-size:13px;font-weight:700;display:inline-block;margin-bottom:8px;">✨ Experience</div><div style="font-size:11px;color:var(--muted2);line-height:1.5;">จากผลิต Content → สร้างประสบการณ์</div></div>
+      <div class="card"><div style="background:rgba(255,255,255,.05);border:1px solid var(--bd);color:var(--muted2);border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:600;display:inline-block;margin-bottom:8px;">Soft Sell</div><div style="font-size:18px;color:var(--pk);margin:5px 0;">↓</div><div style="background:rgba(247,37,133,.1);border:1px solid rgba(247,37,133,.2);color:var(--pk2);border-radius:7px;padding:4px 11px;font-size:13px;font-weight:700;display:inline-block;margin-bottom:8px;">🎯 Right Offer</div><div style="font-size:11px;color:var(--muted2);line-height:1.5;">จากขายอ้อมๆ → เสนอสิ่งที่ใช่ให้คนที่ใช่</div></div>
+    </div>
+    <div style="padding:14px 22px;border-radius:12px;text-align:center;background:rgba(247,37,133,.06);border:1px solid rgba(247,37,133,.15);font-size:14px;font-weight:600;line-height:1.6;">Creator ที่รอดจะไม่ใช่แค่ <span style="color:var(--pk);">Content Creator</span> — แต่จะเป็น <span style="color:var(--pk);">Trust Builder</span> และ <span style="color:var(--pk);">Community Owner</span></div>
+  </div>
+
+  <!-- S1: Right Offer 4 อย่าง -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">04</div><h2>Right Offer = ถูก 4 อย่าง</h2><hr></div>
+    <div class="grid2">
+      <div class="card" style="border-color:rgba(247,37,133,.15);display:flex;gap:12px;"><div style="font-size:24px;">👁️</div><div><div style="font-size:16px;font-weight:700;color:var(--pk2);margin-bottom:4px;">ถูกเห็น</div><div style="font-size:12px;color:var(--muted2);line-height:1.5;">Reach คนที่ใช่ — ไม่ใช่แค่คนเยอะ ต้องเป็นคนที่มีโอกาสสนใจจริงๆ</div></div></div>
+      <div class="card" style="display:flex;gap:12px;"><div style="font-size:24px;">📖</div><div><div style="font-size:16px;font-weight:700;margin-bottom:4px;">ถูกเรื่อง</div><div style="font-size:12px;color:var(--muted2);line-height:1.5;">เนื้อหาตรงกับ Context และความสนใจของเขา</div></div></div>
+      <div class="card" style="display:flex;gap:12px;"><div style="font-size:24px;">🪞</div><div><div style="font-size:16px;font-weight:700;margin-bottom:4px;">ถูกตัวตน</div><div style="font-size:12px;color:var(--muted2);line-height:1.5;">Match กับ Identity ทำให้รู้สึกว่า "นี่คือสิ่งสำหรับฉัน"</div></div></div>
+      <div class="card" style="border-color:rgba(247,37,133,.15);display:flex;gap:12px;"><div style="font-size:24px;">⏰</div><div><div style="font-size:16px;font-weight:700;color:var(--pk2);margin-bottom:4px;">ถูกรอ (Timing)</div><div style="font-size:12px;color:var(--muted2);line-height:1.5;">เสนอในเวลาที่พร้อมตัดสินใจ — ไม่ช้าและไม่เร็วเกิน</div></div></div>
+    </div>
+  </div>
+
+  <!-- S1: Viral vs Conversion -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">05</div><h2>Viral Content vs Conversion Content</h2><hr></div>
+    <div style="overflow-x:auto;">
+    <table class="tbl">
+      <thead><tr><th>Topic</th><th style="color:rgba(147,112,219,.9);">🌊 Viral</th><th style="color:var(--pk);">💰 Conversion</th></tr></thead>
+      <tbody>
+        <tr><td>เป้าหมาย</td><td style="color:rgba(200,185,255,.8);">หยุดนิ้ว / Impressions</td><td style="color:var(--pk2);font-weight:600;">สร้างความเชื่อ / ปิดขาย</td></tr>
+        <tr><td>Mindset</td><td style="color:rgba(200,185,255,.8);">Attention</td><td style="color:var(--pk2);font-weight:600;">Decision</td></tr>
+        <tr><td>Emotion</td><td style="color:rgba(200,185,255,.8);">Surprise / Fun / Curiosity</td><td style="color:var(--pk2);font-weight:600;">Trust / Relief / Confidence</td></tr>
+        <tr><td>วิธีเปิด</td><td style="color:rgba(200,185,255,.8);">Hook แรงใน 1–3 วิ</td><td style="color:var(--pk2);font-weight:600;">เริ่มจาก Pain point</td></tr>
+        <tr><td>KPI</td><td style="color:rgba(200,185,255,.8);">Reach / Views / Shares</td><td style="color:var(--pk2);font-weight:600;">Conversion / Sales / Saves</td></tr>
+        <tr><td>ความผิดพลาด</td><td style="color:rgba(200,185,255,.8);">Viral แต่ไม่ขาย</td><td style="color:var(--pk2);font-weight:600;">ขายตรงเกิน ไม่น่าเชื่อ</td></tr>
+        <tr><td>Key Insight</td><td style="color:rgba(200,185,255,.8);">ทำให้ "หยุดดู & ส่งต่อ"</td><td style="color:var(--pk2);font-weight:600;">ทำให้ "คลิกตัดสินใจ"</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- S1: Platforms -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">06</div><h2>Platform แต่ละตัวทำหน้าที่อะไร?</h2><hr></div>
+    <div class="plat-list">
+      <div class="plat-row"><div class="plat-icon">🎵</div><div><div class="p-role">TikTok = <span style="color:var(--pk);">Discovery & Hook</span></div><div class="p-desc">จุดแรกที่คนค้นพบ — ดึงดูดใน 1–3 วิ Algorithm ผลักไปหาคนใหม่</div></div></div>
+      <div class="plat-row"><div class="plat-icon">📸</div><div><div class="p-role">Instagram = <span style="color:var(--pk2);">Identity & Lifestyle</span></div><div class="p-desc">แสดง Identity — คนใช้ IG เพื่อ Aspire และ Define ตัวเอง</div></div></div>
+      <div class="plat-row"><div class="plat-icon">👥</div><div><div class="p-role">Facebook = <span style="color:var(--wh2);">Relatability & Share</span></div><div class="p-desc">Content ที่ Relatable เชื่อมโยงกับชีวิตจริง ทำ Organic Reach ผ่านการแชร์</div></div></div>
+      <div class="plat-row"><div class="plat-icon">▶️</div><div><div class="p-role">YouTube = <span style="color:var(--pk2);">Authority & Depth</span></div><div class="p-desc">สร้าง Credibility + Expert Status — Long-form ที่ลึก ทำให้เชื่อและตัดสินใจ</div></div></div>
+    </div>
+  </div>
+
+  <!-- S1: Sell without Selling -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">07</div><h2>Sell without Selling</h2><hr></div>
+    <div style="padding:24px;border-radius:14px;background:rgba(247,37,133,.06);border:1px solid rgba(247,37,133,.15);text-align:center;margin-bottom:16px;">
+      <div style="font-size:clamp(18px,3vw,30px);font-weight:700;background:linear-gradient(135deg,#fff,var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:7px;">Sell without Selling</div>
+      <div style="font-size:14px;color:var(--muted2);">= <span style="color:var(--pk2);font-weight:600;">"Make them feel, not force them to buy"</span></div>
+    </div>
+    <div class="steps5">
+      <div class="step-card"><div class="step-num" style="background:rgba(247,37,133,.1);color:var(--pk);">1</div><div class="step-title">เริ่มจาก Pain<br>ไม่ใช่ Product</div><div class="step-sub">พูดถึงปัญหาก่อน</div></div>
+      <div class="step-card"><div class="step-num" style="background:rgba(255,255,255,.07);color:#fff;">2</div><div class="step-title">เล่าเป็น Story<br>ไม่ใช่ Script</div><div class="step-sub">เรื่องจริงจากประสบการณ์</div></div>
+      <div class="step-card"><div class="step-num" style="background:rgba(247,37,133,.1);color:var(--pk);">3</div><div class="step-title">ใส่ Proof<br>ให้เนียน</div><div class="step-sub">หลักฐาน ผลลัพธ์ ดูธรรมชาติ</div></div>
+      <div class="step-card"><div class="step-num" style="background:rgba(255,255,255,.07);color:#fff;">4</div><div class="step-title">Soft Sell<br>(อย่าปิดแรง)</div><div class="step-sub">เสนออย่างอ่อนโยน</div></div>
+      <div class="step-card"><div class="step-num" style="background:rgba(247,37,133,.1);color:var(--pk);">5</div><div class="step-title">Make it Easy<br>to Act</div><div class="step-sub">Link ชัด ขั้นตอนน้อย</div></div>
+    </div>
+  </div>
+
+  <!-- S1: Summary -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">✦</div><h2>Master Summary — Set 1</h2><hr></div>
+    <div style="background:var(--s1);border:1px solid rgba(247,37,133,.15);border-radius:16px;padding:26px;">
+      <div style="font-size:clamp(15px,2.5vw,22px);font-weight:700;background:linear-gradient(135deg,#fff,var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;">🔑 Key Takeaways</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:18px;">Social Media & Influencer Trends 2026 · Tellscore × Digital Shortcut</div>
+      <div class="key-grid">
+        <div class="key-card"><div class="kn" style="color:var(--pk);">01</div><div class="kt"><h5>Trust ≠ Habit</h5><p>Algorithm สร้างความเคยชิน ≠ Trust จริงๆ ต้องมาจาก Understanding</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">02</div><div class="kt"><h5>Trust → Relationship → Revenue</h5><p>Trust ต้องต่อยอดเป็น Relationship ถึงจะสร้าง Revenue</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">03</div><div class="kt"><h5>Creator = Trust Builder</h5><p>ไม่ใช่แค่ Content Creator — ต้องเป็น Community Owner</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">04</div><div class="kt"><h5>Right Offer = ถูก 4 อย่าง</h5><p>ถูกเห็น + ถูกเรื่อง + ถูกตัวตน + ถูกรอ</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">05</div><div class="kt"><h5>Viral ≠ Conversion</h5><p>Content ต่างกัน KPI ต่างกัน ต้องเลือกให้ตรงเป้า</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">06</div><div class="kt"><h5>Sell without Selling</h5><p>Pain → Story → Proof → Soft Sell → Easy to Act</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div class="footer-brand">Recap By NitrogenZ.</div><div class="footer-detail">Set 1 · Social Media & Influencer Trends 2026 · Martech Expo 2026 · 24 Mar 2026</div></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  SET 2 — Digital Marketing & Consumer Behavior
+══════════════════════════════════════════ -->
+<div class="set-page" id="set1">
+<div class="page">
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="pd"></span>Set 2 · Martech Expo 2026</div>
+    <h1>Digital Marketing &<br>Consumer Behavior 2026</h1>
+    <p class="hero-sub">การตลาดออนไลน์และพฤติกรรมผู้บริโภคในปี 2026</p>
+    <div class="hero-meta"><span>📍 Martech Expo 2026</span><span class="hero-sep">·</span><span>🗓️ 24 Mar 2026</span><span class="hero-sep">·</span><span>✍️ Recap By NitrogenZ.</span></div>
+    <div class="speakers">
+      <div class="sc"><div class="sa" style="background:rgba(247,37,133,.12);color:var(--pk);">ส</div><div><div style="font-size:12px;font-weight:600;">สิทธินันท์ พลวิสุทธิ์ศักดิ์</div><div class="sr">CEO, Content Shifu</div></div></div>
+      <div class="sc"><div class="sa" style="background:rgba(255,255,255,.07);color:#fff;">ณ</div><div><div style="font-size:12px;font-weight:600;">ณัฐพล ม่วงทำ</div><div class="sr">Everyday Marketing</div></div></div>
+      <div class="sc"><div class="sa" style="background:rgba(247,37,133,.08);color:var(--pk2);">ก</div><div><div style="font-size:12px;font-weight:600;">กคณัฐ การิระวงค์</div><div class="sr">Moderator, Future Trends</div></div></div>
+    </div>
+  </div>
+
+  <!-- S2: Marketing Strategies Ranking -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">01</div><h2>Digital Marketing Strategies to Use in 2026</h2><hr></div>
+    <div class="banner"><h3>Top 3 กลยุทธ์ที่ Digital Marketer จะใช้ในปี 2026</h3><p>จากการสำรวจ Digital Marketing Professionals ในไทย (Content Shifu Marketing Trends Report 2026 · 14 Jan 2026)</p></div>
+    <div class="bar-wrap">
+      <div class="bar-item"><div class="bar-label">Content Marketing</div><div class="bar-track bar-top3"><div class="bar-fill" style="width:74.5%;background:linear-gradient(90deg,var(--pk),var(--pk2));">74.5%</div></div><div class="bar-val" style="color:var(--pk);">74.5%</div></div>
+      <div class="bar-item"><div class="bar-label">Social Media Marketing</div><div class="bar-track bar-top3"><div class="bar-fill" style="width:60.2%;background:linear-gradient(90deg,var(--pk),var(--pk2));">60.2%</div></div><div class="bar-val" style="color:var(--pk);">60.2%</div></div>
+      <div class="bar-item"><div class="bar-label">Social Ads (FB/TikTok)</div><div class="bar-track bar-top3"><div class="bar-fill" style="width:59.8%;background:linear-gradient(90deg,var(--pk),var(--pk2));">59.8%</div></div><div class="bar-val" style="color:var(--pk);">59.8%</div></div>
+      <div class="bar-item"><div class="bar-label">SEO / Website / Blog</div><div class="bar-track"><div class="bar-fill" style="width:51.9%;background:#333;">51.9%</div></div><div class="bar-val">51.9%</div></div>
+      <div class="bar-item"><div class="bar-label">Influencer Marketing</div><div class="bar-track"><div class="bar-fill" style="width:44%;background:#333;">44.0%</div></div><div class="bar-val">44.0%</div></div>
+      <div class="bar-item"><div class="bar-label">Community Marketing</div><div class="bar-track"><div class="bar-fill" style="width:39.8%;background:#333;">39.8%</div></div><div class="bar-val">39.8%</div></div>
+      <div class="bar-item"><div class="bar-label">Search Ads (Google/PPC)</div><div class="bar-track"><div class="bar-fill" style="width:39.6%;background:#333;">39.6%</div></div><div class="bar-val">39.6%</div></div>
+      <div class="bar-item"><div class="bar-label">Affiliate Marketing</div><div class="bar-track"><div class="bar-fill" style="width:33.8%;background:#2a2a2a;">33.8%</div></div><div class="bar-val">33.8%</div></div>
+      <div class="bar-item"><div class="bar-label">UGC</div><div class="bar-track"><div class="bar-fill" style="width:26.6%;background:#2a2a2a;">26.6%</div></div><div class="bar-val">26.6%</div></div>
+      <div class="bar-item"><div class="bar-label">E-Marketplace Ads</div><div class="bar-track"><div class="bar-fill" style="width:19.3%;background:#222;">19.3%</div></div><div class="bar-val">19.3%</div></div>
+    </div>
+    <div class="insight-block" style="margin-top:14px;">
+      <h4>💡 Insights จากข้อมูล</h4>
+      <div class="insight-item"><div class="i-dot"></div><span><strong>Content Marketing ครองอันดับ 1</strong> ด้วย 74.5% — ยืนยันว่า Content ยังคือหัวใจของ Digital Marketing ในปี 2026</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span><strong>Social Media + Social Ads</strong> ติดอันดับ 2-3 แสดงว่า Paid + Organic บน Social ยังเป็น Priority หลัก</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span><strong>Influencer Marketing 44%</strong> — ยังสำคัญแต่ต้องเลือกให้ตรง Trust ไม่ใช่แค่ Reach</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span><strong>GEO (Generative Engine Optimization) 21.5%</strong> — trend ใหม่ที่น่าจับตาเมื่อ AI Search เติบโต</span></div>
+    </div>
+  </div>
+
+  <!-- S2: Content Formats -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">02</div><h2>Content Formats to Create in 2026</h2><hr></div>
+    <div class="bar-wrap">
+      <div class="bar-item"><div class="bar-label">Video</div><div class="bar-track bar-top3"><div class="bar-fill" style="width:88.3%;background:linear-gradient(90deg,var(--pk),var(--pk2));">88.3%</div></div><div class="bar-val" style="color:var(--pk);">88.3%</div></div>
+      <div class="bar-item"><div class="bar-label">Short Video</div><div class="bar-track bar-top3"><div class="bar-fill" style="width:80%;background:linear-gradient(90deg,var(--pk),var(--pk2));">80.0%</div></div><div class="bar-val" style="color:var(--pk);">80.0%</div></div>
+      <div class="bar-item"><div class="bar-label">Social Post / Album</div><div class="bar-track bar-top3"><div class="bar-fill" style="width:63.5%;background:linear-gradient(90deg,#a0155a,var(--pk));">63.5%</div></div><div class="bar-val" style="color:var(--pk2);">63.5%</div></div>
+      <div class="bar-item"><div class="bar-label">Short-form Article</div><div class="bar-track"><div class="bar-fill" style="width:46.4%;background:#333;">46.4%</div></div><div class="bar-val">46.4%</div></div>
+      <div class="bar-item"><div class="bar-label">Infographic</div><div class="bar-track"><div class="bar-fill" style="width:41.1%;background:#333;">41.1%</div></div><div class="bar-val">41.1%</div></div>
+      <div class="bar-item"><div class="bar-label">Long-form Article</div><div class="bar-track"><div class="bar-fill" style="width:36.5%;background:#2a2a2a;">36.5%</div></div><div class="bar-val">36.5%</div></div>
+      <div class="bar-item"><div class="bar-label">Webinar / Online Event</div><div class="bar-track"><div class="bar-fill" style="width:23.5%;background:#222;">23.5%</div></div><div class="bar-val">23.5%</div></div>
+    </div>
+    <div class="insight-block" style="margin-top:14px;">
+      <h4>💡 Insights</h4>
+      <div class="insight-item"><div class="i-dot"></div><span><strong>Video ครอง 88.3%</strong> — ไม่ว่าจะ Short หรือ Long-form ล้วนสำคัญ แต่ Short Video (80%) เป็น Format ที่เติบโตเร็วที่สุด</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span><strong>Social Post / Album 63.5%</strong> — Carousel และ Album ยังมี Engagement สูง โดยเฉพาะบน IG และ Facebook</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span>Strategy ที่ได้ผล: ทำ <strong>Video เป็น Hero Content</strong> แล้ว Repurpose เป็น Short Clip, Social Post, Infographic</span></div>
+    </div>
+  </div>
+
+  <!-- S2: Pet Economy -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">03</div><h2>เด็กเกิดน้อยลง แต่... ลูกรักมีมากขึ้น 🐾</h2><hr></div>
+    <div class="banner"><h3 style="font-size:18px;">Pet Economy — โอกาสธุรกิจที่ไม่ควรมองข้าม</h3><p>ttb analytics คาดมูลค่าตลาดสัตว์เลี้ยงไทยปี 2568 ขยายตัว 13.2% มูลค่า 9.2 หมื่นล้านบาท พร้อมคาดทะลุแสนล้านในปี 2569</p></div>
+    <div class="data-grid">
+      <div class="data-card"><div class="dc-num" style="color:var(--pk);">9.2 หมื่น</div><div class="dc-label">ล้านบาท มูลค่าตลาดสัตว์เลี้ยงปี 2568</div></div>
+      <div class="data-card"><div class="dc-num" style="color:var(--wh2);">+13.2%</div><div class="dc-label">อัตราการเติบโต CAGR ปี 2562-2568</div></div>
+      <div class="data-card"><div class="dc-num" style="color:var(--pk2);">50,500</div><div class="dc-label">บาท/ปี ค่าใช้จ่าย Pet Humanization</div></div>
+      <div class="data-card"><div class="dc-num" style="color:var(--wh2);">7,910</div><div class="dc-label">บาท/ปี ค่าใช้จ่าย Pet Ownership</div></div>
+    </div>
+    <div class="grid2" style="margin-top:4px;">
+      <div class="card"><div style="font-size:13px;font-weight:700;color:var(--pk2);margin-bottom:10px;">📊 4 กลุ่มหลักในตลาดสัตว์เลี้ยง</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd);"><span>🐾 Pet Food</span><span style="color:var(--pk);font-family:var(--mono);font-weight:700;">CAGR 20.5%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd);"><span>🏥 Pet Healthcare</span><span style="color:var(--wh2);font-family:var(--mono);">CAGR 17.9%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd);"><span>✂️ Pet Care Services</span><span style="color:var(--wh2);font-family:var(--mono);">CAGR 20.0%</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;"><span>🎀 Pet Accessories</span><span style="color:var(--wh2);font-family:var(--mono);">CAGR 14.9%</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px;color:var(--pk2);">🎯 Pet Longevity — Trend ที่มาแรง</div>
+        <div style="font-size:12.5px;color:var(--muted2);line-height:1.7;margin-bottom:10px;">เจ้าของสัตว์เลี้ยงต้องการให้ลูกรักอยู่กับตัวเองได้นานที่สุด → ความต้องการ Healthcare, Nutrition, Wellness Products พุ่งสูง</div>
+        <div class="insight-block" style="margin-bottom:0;padding:12px 14px;">
+          <div class="insight-item" style="margin-bottom:4px;"><div class="i-dot"></div><span>Premium Pet Food ที่เน้น Longevity Formula</span></div>
+          <div class="insight-item" style="margin-bottom:4px;"><div class="i-dot"></div><span>Preventive Healthcare แทน Reactive</span></div>
+          <div class="insight-item" style="margin-bottom:0;"><div class="i-dot"></div><span>Mental Wellness สำหรับสัตว์เลี้ยง</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S2: AI Automate vs Human Made -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">04</div><h2>Automate vs Human Made</h2><hr></div>
+    <div class="vs-grid">
+      <div class="vs-card" style="background:rgba(255,255,255,.04);border:1px solid var(--bd);">
+        <h4>🤖 Automate</h4>
+        <div class="vs-item"><div class="vi">⚙️</div><span><strong>Repetitive Tasks Handling</strong> — งานซ้ำๆ ที่ใช้เวลาแต่ไม่ต้องคิด</span></div>
+        <div class="vs-item"><div class="vi">📧</div><span><strong>Lead Nurturing</strong> — Sequence อีเมล, Follow-up อัตโนมัติ</span></div>
+        <div class="vs-item"><div class="vi">💬</div><span><strong>Basic Customer Service</strong> — FAQ, Chatbot, First Response</span></div>
+        <div style="margin-top:10px;padding:9px 12px;background:rgba(255,255,255,.04);border-radius:8px;font-size:11.5px;color:var(--muted2);">AI ทำได้ดี: งานที่มี Pattern ชัดเจน</div>
+      </div>
+      <div class="vs-card" style="background:rgba(247,37,133,.05);border:1px solid rgba(247,37,133,.15);">
+        <h4 style="color:var(--pk2);">🧠 Human Made</h4>
+        <div class="vs-item"><div class="vi">🎯</div><span><strong>Strategic Planning</strong> — กำหนดทิศทาง Vision และ Positioning</span></div>
+        <div class="vs-item"><div class="vi">✨</div><span><strong>Creative Campaign / Content</strong> — Idea ที่แตกต่าง มีเอกลักษณ์</span></div>
+        <div class="vs-item"><div class="vi">🤝</div><span><strong>Experience Enhancement</strong> — สร้าง Emotional Connection ที่ลึกกว่า</span></div>
+        <div style="margin-top:10px;padding:9px 12px;background:rgba(247,37,133,.08);border-radius:8px;font-size:11.5px;color:var(--pk2);">Human ทำได้ดี: งานที่ต้องการ Judgment + Empathy</span></div>
+      </div>
+    </div>
+    <div class="qblock">งาน <em>สำคัญ + ด่วน</em> → ทำเอง · งาน <em>สำคัญ + ไม่ด่วน</em> → วางแผนก่อน · งาน <em>ไม่สำคัญ + ด่วน</em> → ให้คนอื่นทำ · งาน <em>ไม่สำคัญ + ไม่ด่วน</em> → ว่างหรอ?</div>
+  </div>
+
+  <!-- S2: Human Data Driven 5.0 -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">05</div><h2>Human Data Driven Business — Data 5.0</h2><hr></div>
+    <div class="banner" style="margin-bottom:14px;"><h3>Data Evolution: จาก Mass Marketing สู่ <em>Humanized Personalization</em></h3><p>Sources: App Tracking · Wearable · Smart Watch · IoT · AI</p></div>
+    <div class="evo-wrap">
+      <div class="evo-row"><div class="evo-label" style="color:var(--pk);font-size:13px;">Data 5.0<br>Human Data</div><div class="evo-data" style="background:linear-gradient(135deg,rgba(247,37,133,.2),rgba(247,37,133,.1));border:1px solid rgba(247,37,133,.3);">😴 Sleep · ❤️ Heart Rate · 🔥 Kcal</div><div class="evo-mkt" style="color:var(--pk2);font-weight:600;">Humanized Personalization</div></div>
+      <div class="evo-row"><div class="evo-label" style="color:var(--wh2);">Data 4.0<br>Omni Data</div><div class="evo-data" style="background:rgba(255,255,255,.07);border:1px solid var(--bd);">🏪 Offline Store · ☕ Purchase Behavior</div><div class="evo-mkt">Personalization</div></div>
+      <div class="evo-row"><div class="evo-label">Data 3.0<br>Digital Behavior</div><div class="evo-data" style="background:rgba(255,255,255,.04);border:1px solid var(--bd);">📱 App Usage · 📍 Location</div><div class="evo-mkt">Performance Marketing</div></div>
+      <div class="evo-row"><div class="evo-label">Data 2.0<br>Customer Data</div><div class="evo-data" style="background:rgba(255,255,255,.03);border:1px solid var(--bd);">👤 Customer Profile</div><div class="evo-mkt">CRM Marketing</div></div>
+      <div class="evo-row"><div class="evo-label">Data 1.0<br>Business Data</div><div class="evo-data" style="background:rgba(255,255,255,.02);border:1px solid var(--bd);">🏢 Transaction Data</div><div class="evo-mkt">Mass Marketing</div></div>
+    </div>
+    <div class="insight-block" style="margin-top:14px;">
+      <h4>💡 ตัวอย่าง Humanized Personalization จากสไลด์</h4>
+      <div class="insight-item"><div class="i-dot"></div><span>จากข้อมูลว่า <strong>นอนน้อย + หัวใจเต้นไม่ปกติ</strong> → น่าจะตื่นเต้น → AI แนะนำ "เปลี่ยนกาแฟเป็นชาที่ทำให้สงบ" แทน</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span>นี่คือ <strong>Data Driven 5.0</strong> — ไม่ใช่แค่รู้ว่าคุณซื้ออะไร แต่รู้ว่าร่างกายคุณต้องการอะไรจริงๆ</span></div>
+    </div>
+  </div>
+
+  <!-- S2: Humanized Personalization -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">06</div><h2>Humanized Personalization — อนาคตของการตลาด</h2><hr></div>
+    <div class="quote-slides">
+      <div class="qs-item"><div class="qs-main">ในอนาคต การตลาดแบบรู้ใจ <span class="contrast">(Personalization)</span> จะเป็นเรื่อง<em>ธรรมดา</em></div><div class="qs-insight">Personalization ระดับ Data 3.0-4.0 จะกลายเป็น Table Stakes — ทุกแบรนด์ทำได้แล้ว ไม่ใช่ Differentiator อีกต่อไป</div></div>
+      <div class="qs-item"><div class="qs-main">แต่... การตลาดแบบเข้าใจมนุษย์ <em>Humanized Personalization</em> จะกลายเป็นเรื่องสำคัญ</div><div class="qs-insight">ใช้ Human Data (สุขภาพ, อารมณ์, บริบทชีวิต) เพื่อเสนอสิ่งที่ "เหมาะกับมนุษย์คนนั้น ในขณะนั้น" ไม่ใช่แค่ Based on Purchase History</div></div>
+      <div class="qs-item"><div class="qs-main">วัดว่าธุรกิจจะเป็นคน<em>แบบไหน</em></div><div class="qs-insight">Experience · Context · Taste — แบรนด์ต้องเข้าใจ 3 มิตินี้ของลูกค้า: ประสบการณ์ที่เคยมี, บริบทชีวิตตอนนี้, และ Aesthetic ที่ชอบ</div></div>
+    </div>
+    <div class="grid3" style="margin-top:14px;">
+      <div class="card" style="border-color:rgba(247,37,133,.15);"><div style="font-size:22px;margin-bottom:8px;">🎭</div><div style="font-size:14px;font-weight:700;color:var(--pk2);margin-bottom:5px;">Experience</div><div style="font-size:11.5px;color:var(--muted2);line-height:1.5;">ประสบการณ์ที่ลูกค้าเคยมี — ส่งผลต่อการตัดสินใจซื้อในปัจจุบัน เช่น เคยใช้รถ Mercedes มาก่อน</div></div>
+      <div class="card"><div style="font-size:22px;margin-bottom:8px;">🌍</div><div style="font-size:14px;font-weight:700;margin-bottom:5px;">Context</div><div style="font-size:11.5px;color:var(--muted2);line-height:1.5;">สถานการณ์ปัจจุบันของลูกค้า — กำลังทำอะไร อยู่ที่ไหน มีปัญหาอะไรอยู่ตอนนี้</div></div>
+      <div class="card" style="border-color:rgba(247,37,133,.15);"><div style="font-size:22px;margin-bottom:8px;">✨</div><div style="font-size:14px;font-weight:700;color:var(--pk2);margin-bottom:5px;">Taste</div><div style="font-size:11.5px;color:var(--muted2);line-height:1.5;">Aesthetic และ Style ที่ชอบ — ชอบแบบไหน ไม่ชอบแบบไหน รวมถึง Values ที่ยึดถือ</div></div>
+    </div>
+  </div>
+
+  <!-- S2: Priority Matrix -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">07</div><h2>Priority Matrix — จัดงานให้ถูก</h2><hr></div>
+    <div class="matrix-grid">
+      <div class="matrix-cell" style="background:rgba(247,37,133,.07);"><div style="font-size:10px;color:var(--pk2);font-family:var(--mono);font-weight:700;letter-spacing:1px;margin-bottom:8px;">สำคัญ + ด่วน</div><div class="mc-title" style="color:var(--pk);">ได้เพิ่มโอกาส</div><div class="mc-desc">ทำเองทันที — งานเหล่านี้สร้าง Value สูงสุด ต้องไม่ delegate หรือ delay</div></div>
+      <div class="matrix-cell mc-divider-v" style="background:rgba(255,255,255,.03);"><div style="font-size:10px;color:var(--wh2);font-family:var(--mono);font-weight:700;letter-spacing:1px;margin-bottom:8px;">สำคัญ + ไม่ด่วน</div><div class="mc-title">เงินดี</div><div class="mc-desc">วางแผนก่อน ตั้ง deadline — งาน Strategic ที่ถ้าละเลยจะกลายเป็น ด่วน ทีหลัง</div></div>
+      <div class="matrix-cell mc-divider-h" style="background:rgba(255,255,255,.02);"><div style="font-size:10px;color:var(--muted2);font-family:var(--mono);font-weight:700;letter-spacing:1px;margin-bottom:8px;">ไม่สำคัญ + ด่วน</div><div class="mc-title" style="color:var(--muted2);">ให้คนอื่นทำ</div><div class="mc-desc">Delegate ออกไป — งาน Urgent แต่คนอื่นก็ทำได้ดีพอๆ กัน ไม่ต้องทำเอง</div></div>
+      <div class="matrix-cell mc-divider-h mc-divider-v" style="background:rgba(255,255,255,.01);"><div style="font-size:10px;color:var(--muted);font-family:var(--mono);font-weight:700;letter-spacing:1px;margin-bottom:8px;">ไม่สำคัญ + ไม่ด่วน</div><div class="mc-title" style="color:var(--muted);">ว่างหรอ?</div><div class="mc-desc">ตัดออก หรือทำเมื่อมีเวลาเหลือ — อย่าให้งาน Low-value กินเวลา High-value</div></div>
+    </div>
+    <div class="insight-block" style="margin-top:4px;">
+      <h4>💡 ทำไม Priority Matrix ถึงสำคัญในยุค AI?</h4>
+      <div class="insight-item"><div class="i-dot"></div><span>AI ทำได้ดี: งาน <strong>ไม่ด่วน + ไม่สำคัญ</strong> และงาน <strong>ด่วน + ไม่สำคัญ</strong> — ควร Automate ทิ้งไว้</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span>Human ต้องโฟกัส: งาน <strong>สำคัญ</strong> ทั้งสองช่อง — Strategic Planning และ High-value Execution</span></div>
+    </div>
+  </div>
+
+  <!-- S2: Summary -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">✦</div><h2>Master Summary — Set 2</h2><hr></div>
+    <div style="background:var(--s1);border:1px solid rgba(247,37,133,.15);border-radius:16px;padding:26px;">
+      <div style="font-size:clamp(15px,2.5vw,22px);font-weight:700;background:linear-gradient(135deg,#fff,var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;">🔑 Key Takeaways</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:18px;">Digital Marketing & Consumer Behavior Trends 2026 · Content Shifu × ณัฐพล ม่วงทำ</div>
+      <div class="key-grid">
+        <div class="key-card"><div class="kn" style="color:var(--pk);">01</div><div class="kt"><h5>Content Marketing ยังครองอันดับ 1</h5><p>74.5% ของ Marketers จะลงทุนใน Content — Video คือ Format หลัก</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">02</div><div class="kt"><h5>Pet Economy โตแรง</h5><p>ตลาดสัตว์เลี้ยง 9.2 หมื่นล้าน CAGR 13.2% — Pet Humanization คือ Driver หลัก</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">03</div><div class="kt"><h5>AI Automate, Humans Strategize</h5><p>ให้ AI จัดการ Repetitive Tasks — Human โฟกัสที่ Strategy + Creative</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">04</div><div class="kt"><h5>Data 5.0 = Human Data</h5><p>เลยจาก Behavior Data → รู้จักมนุษย์จริงๆ ผ่าน Wearable + IoT + Health Data</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">05</div><div class="kt"><h5>Humanized Personalization คือ Next Level</h5><p>Personalization จะเป็นธรรมดา — แบรนด์ที่เข้าใจ Human จะชนะ</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">06</div><div class="kt"><h5>Experience · Context · Taste</h5><p>3 มิติที่แบรนด์ต้องเข้าใจเพื่อเสนอ Right Offer ให้คนที่ใช่ในเวลาที่ใช่</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div class="footer-brand">Recap By NitrogenZ.</div><div class="footer-detail">Set 2 · Digital Marketing & Consumer Behavior 2026 · Martech Expo 2026 · 24 Mar 2026</div></div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  SET 3 — Big Brands Don't Always Win
+══════════════════════════════════════════ -->
+<div class="set-page" id="set2">
+<div class="page">
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="pd"></span>Set 3 · Martech Expo 2026</div>
+    <h1>Big Brands Don't<br>Always Win</h1>
+    <p class="hero-sub">Brand ในยุค AI — ความเชื่อ ความหมาย และสิ่งที่มนุษย์สร้างได้แต่ AI สร้างไม่ได้</p>
+    <div class="hero-meta"><span>📍 AdTech Stage · Martech Expo 2026</span><span class="hero-sep">·</span><span>🗓️ 24 Mar 2026</span><span class="hero-sep">·</span><span>✍️ Recap By NitrogenZ.</span></div>
+    <div class="speakers">
+      <div class="sc"><div class="sa" style="background:rgba(255,255,255,.07);color:#fff;">🎩</div><div><div style="font-size:12px;font-weight:600;">International Speaker</div><div class="sr">Brand Strategy in AI Era · AdTech Stage</div></div></div>
+    </div>
+  </div>
+
+  <!-- S3: Core Thesis -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">01</div><h2>ทำไม Big Brands ถึงไม่ได้ชนะเสมอ?</h2><hr></div>
+    <div class="banner"><h3>Big Brands Don't Always <em>Win</em></h3><p>ในยุคที่ AI ทำให้ Content ผลิตง่ายขึ้น Distribution กว้างขึ้น — แบรนด์ใหญ่ไม่ได้มีข้อได้เปรียบแบบเดิมอีกต่อไป</p></div>
+    <div class="grid3" style="margin-bottom:14px;">
+      <div class="card" style="border-color:rgba(247,37,133,.15);text-align:center;padding:24px 16px;">
+        <div style="font-size:28px;font-weight:800;color:var(--pk);font-family:var(--mono);margin-bottom:8px;">Budget</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">งบประมาณมากขึ้นไม่ได้หมายความว่าชนะเสมอ — AI ทำให้ต้นทุน Content ลดลงมาก</div>
+      </div>
+      <div class="card" style="text-align:center;padding:24px 16px;">
+        <div style="font-size:28px;font-weight:800;color:var(--wh2);font-family:var(--mono);margin-bottom:8px;">Distribution</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">Social Algorithm ทำให้แบรนด์เล็กเข้าถึงคนได้เท่ากัน ถ้า Content ดีพอ</div>
+      </div>
+      <div class="card" style="border-color:rgba(247,37,133,.15);text-align:center;padding:24px 16px;">
+        <div style="font-size:28px;font-weight:800;color:var(--pk2);font-family:var(--mono);margin-bottom:8px;">Visibility</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">การมองเห็น ≠ การถูกเลือก — Seen ≠ Chosen</div>
+      </div>
+    </div>
+    <div class="qblock" style="font-size:18px;font-weight:700;">Seen <span style="color:var(--muted2);font-weight:400;">≠</span> <em>Chosen</em></div>
+    <div style="padding:13px 18px;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:11px;font-size:13px;color:var(--muted2);line-height:1.6;">
+      การถูกมองเห็นคือเงื่อนไขขั้นต้น — แต่การถูก<strong style="color:var(--wh2);">เลือก</strong>ต้องการ <strong style="color:var(--pk2);">Clarity + Belief + Trust</strong> ที่ AI ไม่สามารถสร้างแทนได้
+    </div>
+  </div>
+
+  <!-- S3: Not Bigger but Clearer -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">02</div><h2>Not Bigger, but Clearer</h2><hr></div>
+    <div style="padding:32px;border-radius:16px;background:rgba(247,37,133,.06);border:1px solid rgba(247,37,133,.15);text-align:center;margin-bottom:18px;">
+      <div style="font-size:clamp(22px,4vw,42px);font-weight:800;background:linear-gradient(135deg,#fff,var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-1px;">Not Bigger<br><span style="font-size:.6em;font-weight:400;">but</span> Clearer</div>
+    </div>
+    <div class="grid2">
+      <div class="insight-block">
+        <h4>❌ ความเข้าใจผิดเดิม</h4>
+        <div class="insight-item"><div class="i-dot"></div><span>Brand ใหญ่ขึ้น = ชนะ</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>Budget มากกว่า = ได้เปรียบ</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>Content เยอะขึ้น = ดีกว่า</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>Reach กว้างกว่า = ชนะ</span></div>
+      </div>
+      <div class="insight-block" style="border-color:rgba(247,37,133,.2);">
+        <h4 style="color:var(--pk2);">✅ ยุค AI ต้องการ</h4>
+        <div class="insight-item"><div class="i-dot"></div><span><strong>Clarity</strong> — ชัดเจนว่าแบรนด์เป็นอะไร ยืนอยู่ตรงไหน</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span><strong>Belief</strong> — มีสิ่งที่เชื่อมั่นและแสดงออกมาอย่างสม่ำเสมอ</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span><strong>Distinctiveness</strong> — แตกต่างอย่างมีความหมาย ไม่ใช่แค่ Different</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span><strong>Trust</strong> — สร้างจากความสม่ำเสมอและ Authenticity</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: AI vs Brand -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">03</div><h2>AI = Pattern Engine · Brand = Belief Engine</h2><hr></div>
+    <div class="ai-brand-grid">
+      <div class="ab-cell" style="background:rgba(255,255,255,.03);">
+        <h4 style="color:var(--muted2);">🤖 AI</h4>
+        <div class="ab-title">Pattern Engine</div>
+        <div class="ab-sub">records, learns patterns, and repeats.</div>
+        <div class="ab-items">
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(255,255,255,.07);color:var(--muted2);">AI</div><span>AI records — จดจำทุกสิ่งที่เคยเกิดขึ้น</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(255,255,255,.07);color:var(--muted2);">AI</div><span>AI learns patterns — เรียนรู้รูปแบบจากข้อมูล</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(255,255,255,.07);color:var(--muted2);">AI</div><span>AI repeats — ผลิตซ้ำตาม Pattern</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(255,255,255,.07);color:var(--muted2);">AI</div><span>AI Predicts — คาดเดาสิ่งที่น่าจะเกิดขึ้น</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(255,255,255,.07);color:var(--muted2);">AI</div><span>AI Creates Content — ผลิต Content ได้ไม่จำกัด</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(248,113,113,.1);color:#f87171;">❌</div><span style="color:var(--muted2);">AI ไม่สามารถสร้าง True Meaning ได้</span></div>
+        </div>
+      </div>
+      <div class="ab-cell ab-divider" style="background:rgba(247,37,133,.04);">
+        <h4 style="color:var(--pk2);">🧠 Brand</h4>
+        <div class="ab-title" style="color:var(--pk2);">Belief Engine</div>
+        <div class="ab-sub">Vision, positioning, and stands for something.</div>
+        <div class="ab-items">
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(247,37,133,.12);color:var(--pk);">✅</div><span>A person <strong>believes</strong> — มีสิ่งที่ยึดมั่น</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(247,37,133,.12);color:var(--pk);">✅</div><span>A person <strong>chooses</strong> — ตัดสินใจเลือก ไม่ใช่แค่ Predict</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(247,37,133,.12);color:var(--pk);">✅</div><span>A person is an <strong>individual entity</strong> — มีตัวตน</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(247,37,133,.12);color:var(--pk);">✅</div><span>Humans <strong>Choose</strong> — ไม่ใช่แค่ Follow Prediction</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(247,37,133,.12);color:var(--pk);">✅</div><span>Humans Create <strong>Perspective</strong> — มุมมองที่มีความหมาย</span></div>
+          <div class="ab-item"><div class="ai-mark" style="background:rgba(247,37,133,.15);color:var(--pk);">🔑</div><span style="color:var(--pk2);">Only people can <strong>build brands</strong></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="qblock" style="font-size:14px;"><em>AI Amplifies, Does Not Differentiate</em> — AI ขยายสิ่งที่มีอยู่แล้ว แต่ไม่ได้สร้างความแตกต่างที่แท้จริง</div>
+  </div>
+
+  <!-- S3: Core Quotes -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">04</div><h2>สิ่งที่ AI ทำไม่ได้ — สิ่งที่มนุษย์ต้องทำเอง</h2><hr></div>
+    <div class="quote-slides">
+      <div class="qs-item" style="border-color:rgba(247,37,133,.2);">
+        <div class="qs-main">AI can deliver a word or sentence — but <em>It cannot deliver the true meaning.</em></div>
+        <div class="qs-insight">AI สร้างประโยคได้ แต่ไม่เข้าใจ "ความหมายที่แท้จริง" เบื้องหลัง — เพราะ Meaning มาจาก Belief, Context, และ Human Experience ที่ AI ไม่มี</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-main">AI generated content <span class="contrast">cannot overcome</span> <em>Brand-Belief generated</em></div>
+        <div class="qs-insight">Content ที่ AI สร้างสวยและเยอะแค่ไหนก็ตาม ไม่สามารถเอาชนะ Content ที่มาจาก Brand ที่มี Belief ชัดเจนได้ — เพราะคนซื้อ "ความเชื่อ" ไม่ใช่ Content</div>
+      </div>
+      <div class="qs-item" style="border-color:rgba(247,37,133,.2);">
+        <div class="qs-main"><em>AI can generate content.</em><br><span class="contrast">Only people can build brands.</span></div>
+        <div class="qs-insight">Brand Building ต้องการ Vision, Values, Consistency, และ Human Touch — สิ่งเหล่านี้ไม่มีใน Training Data ของ AI และไม่สามารถ Generate ได้</div>
+      </div>
+      <div class="qs-item">
+        <div class="qs-main">People don't buy from machines. <em>They buy from what they trust.</em></div>
+        <div class="qs-insight">Trust ต้องการ Authenticity, Vulnerability, และ Consistency ที่มาจากตัวตนจริงๆ — ลูกค้ารับรู้ได้ว่าอะไรมาจาก Machine และอะไรมาจากคนจริงๆ</div>
+      </div>
+      <div class="qs-item" style="border-color:rgba(247,37,133,.2);">
+        <div class="qs-main"><em>Free Content</em> / <span class="contrast">Expensive Trust</span></div>
+        <div class="qs-insight">AI ทำให้ Content ราคาถูกลงเรื่อยๆ จนกลายเป็น Free — แต่ Trust ยิ่งหายากและมีมูลค่ามากขึ้นเรื่อยๆ ในโลกที่เต็มไปด้วย AI Content</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S3: AI Amplifies -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">05</div><h2>AI Amplifies — Does Not Differentiate</h2><hr></div>
+    <div class="banner"><h3><em>AI Amplifies</em> — ขยายสิ่งที่มีอยู่แล้ว</h3><p>AI เป็นเครื่องขยาย — ถ้า Brand Strategy ดีอยู่แล้ว AI จะทำให้ดียิ่งขึ้น แต่ถ้า Strategy ไม่มี AI ก็แค่ขยายความว่างเปล่า</p></div>
+    <div class="grid2">
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:var(--wh2);margin-bottom:11px;">🔍 AI Amplifies ในทางบวก</div>
+        <div class="insight-item"><div class="i-dot"></div><span>Brand ที่มี Clear Positioning → AI ช่วยกระจาย Message ได้ไวและกว้างขึ้น</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>Creative Direction ที่แข็งแกร่ง → AI ช่วย Execute ได้เป็นร้อยเป็นพันชิ้น</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>Brand Voice ที่ชัดเจน → AI Maintain ได้ Consistent ทุก Touchpoint</span></div>
+      </div>
+      <div class="card" style="border-color:rgba(247,37,133,.15);">
+        <div style="font-size:13px;font-weight:700;color:var(--pk2);margin-bottom:11px;">⚠️ AI Amplifies ในทางลบ</div>
+        <div class="insight-item"><div class="i-dot"></div><span>Brand ที่ไม่มี Direction → AI ขยายความ Generic จนไม่มีใครจำ</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>ทุกแบรนด์ใช้ AI เหมือนกัน → Content หน้าตาเหมือนกันหมด</span></div>
+        <div class="insight-item"><div class="i-dot"></div><span>AI ไม่สร้างความแตกต่าง — <strong>Differentiation</strong> ยังต้องมาจาก Human Strategy</span></div>
+      </div>
+    </div>
+    <div class="insight-block" style="margin-top:13px;">
+      <h4>💡 Insight เพิ่มเติม: "AI Era ทำให้ Brand Clarity สำคัญกว่าเดิม"</h4>
+      <div class="insight-item"><div class="i-dot"></div><span>ยิ่ง AI ผลิต Content เยอะ → ยิ่งต้องการ Brand ที่มี <strong>Distinctive Identity</strong> ชัดเจน เพื่อตัดความสับสน</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span>ในทะเล Content → คนจำ Brand ที่มี <strong>Clear Point of View</strong> ไม่ใช่แบรนด์ที่มี Content มากที่สุด</span></div>
+      <div class="insight-item"><div class="i-dot"></div><span>Strategy ใหม่: ใช้ AI ช่วย Scale → แต่ใช้ Human สร้าง <strong>Soul + Belief</strong> ที่ AI ทำแทนไม่ได้</span></div>
+    </div>
+  </div>
+
+  <!-- S3: Action Framework -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="border-color:var(--bd);color:var(--muted2);">06</div><h2>Framework: Brand ในยุค AI ควรทำอะไร?</h2><hr></div>
+    <div class="grid3" style="margin-bottom:14px;">
+      <div class="card" style="border-color:rgba(247,37,133,.15);">
+        <div style="font-size:22px;margin-bottom:9px;">🎯</div>
+        <div style="font-size:15px;font-weight:700;color:var(--pk2);margin-bottom:6px;">Define Your Belief</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">แบรนด์ของคุณยืนหยัดเพื่ออะไร? มีความเชื่ออะไรที่แน่วแน่? ถ้าตอบไม่ได้ AI จะทำอะไรให้ก็ไม่มีความหมาย</div>
+      </div>
+      <div class="card">
+        <div style="font-size:22px;margin-bottom:9px;">🔍</div>
+        <div style="font-size:15px;font-weight:700;margin-bottom:6px;">Be Clearer, Not Bigger</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">Positioning ที่ชัดเจนชนะ Positioning ที่ใหญ่เสมอ — รู้ว่าตัวเองเป็นอะไร และไม่เป็นอะไร</div>
+      </div>
+      <div class="card" style="border-color:rgba(247,37,133,.15);">
+        <div style="font-size:22px;margin-bottom:9px;">🤖→👤</div>
+        <div style="font-size:15px;font-weight:700;color:var(--pk2);margin-bottom:6px;">AI Executes, Human Directs</div>
+        <div style="font-size:12px;color:var(--muted2);line-height:1.5;">ให้ AI Scale Content — แต่ Human ต้องกำหนด Direction, Tone, และ Belief ที่ AI ทำตาม</div>
+      </div>
+    </div>
+    <div style="padding:16px 20px;background:rgba(247,37,133,.07);border:1px solid rgba(247,37,133,.18);border-radius:12px;font-size:13px;font-weight:600;color:var(--pk2);text-align:center;line-height:1.7;">
+      🔑 สูตรชนะในยุค AI: <strong style="color:var(--pk);">Brand Belief</strong> ที่ชัดเจน + <strong style="color:var(--wh);">AI</strong> ที่ Scale ได้ = แบรนด์ที่ไม่มีใคร Replace ได้
+    </div>
+  </div>
+
+  <!-- S3: Summary -->
+  <div class="sec">
+    <div class="sh"><div class="sh-n" style="background:rgba(247,37,133,.1);color:var(--pk);border-color:rgba(247,37,133,.2);">✦</div><h2>Master Summary — Set 3</h2><hr></div>
+    <div style="background:var(--s1);border:1px solid rgba(247,37,133,.15);border-radius:16px;padding:26px;">
+      <div style="font-size:clamp(15px,2.5vw,22px);font-weight:700;background:linear-gradient(135deg,#fff,var(--pk));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:5px;">🔑 Key Takeaways</div>
+      <div style="font-size:12px;color:var(--muted2);margin-bottom:18px;">Big Brands & AI Era · AdTech Stage · Martech Expo 2026</div>
+      <div class="key-grid">
+        <div class="key-card"><div class="kn" style="color:var(--pk);">01</div><div class="kt"><h5>Seen ≠ Chosen</h5><p>การถูกมองเห็นไม่พอ — ต้องมี Belief + Clarity ให้คนเลือก</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">02</div><div class="kt"><h5>Not Bigger, but Clearer</h5><p>ความชัดเจนในตัวตน ชนะความใหญ่โตเสมอในยุค AI</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">03</div><div class="kt"><h5>AI = Pattern / Brand = Belief</h5><p>AI ทำซ้ำ Pattern — Brand สร้าง Belief ที่ทำซ้ำไม่ได้</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">04</div><div class="kt"><h5>AI Amplifies, Not Differentiates</h5><p>AI ขยายสิ่งที่มีอยู่ — Strategy และ Differentiation ต้องมาจาก Human</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">05</div><div class="kt"><h5>Free Content, Expensive Trust</h5><p>Content ราคาถูกลง — Trust มีมูลค่ามากขึ้นในทะเล AI Content</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--wh2);">06</div><div class="kt"><h5>Only People Can Build Brands</h5><p>Brand Building ต้องการ Vision + Belief + Authenticity ที่ AI ไม่มี</p></div></div>
+        <div class="key-card"><div class="kn" style="color:var(--pk);">07</div><div class="kt"><h5>People Buy from What They Trust</h5><p>Trust ไม่ได้ซื้อด้วยงบประมาณ แต่สร้างด้วยความจริงใจและสม่ำเสมอ</p></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"><div class="footer-brand">Recap By NitrogenZ.</div><div class="footer-detail">Set 3 · Big Brands & AI Era · Martech Expo 2026 · 24 Mar 2026</div></div>
+</div>
+</div>
+
+</div><!-- end app -->
+
+<script>
+// LOGIN
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+function doLogin(){
+  const v=document.getElementById('pw').value;
+  const err=document.getElementById('login-err');
+  if(v==='Nitrogen'){
+    const ls=document.getElementById('login-screen');
+    ls.style.transition='opacity .5s ease';ls.style.opacity='0';
+    setTimeout(()=>{ls.style.display='none';const app=document.getElementById('app');app.style.display='block';},500);
+  } else {
+    err.style.display='block';
+    document.getElementById('pw').style.borderColor='#f87171';
+    setTimeout(()=>{err.style.display='none';document.getElementById('pw').style.borderColor='';},3000);
+  }
+}
+
+// TABS
+function switchTab(idx,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.set-page').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('set'+idx).classList.add('active');
+  window.scrollTo({top:104,behavior:'smooth'});
+}
+
+// SCROLL PROGRESS
+window.addEventListener('scroll',()=>{
+  const el=document.documentElement;
+  const pct=(el.scrollTop/(el.scrollHeight-el.clientHeight))*100;
+  const f=document.getElementById('prog');
+  if(f)f.style.width=pct+'%';
+});
+</script>
+</body>
+</html>
